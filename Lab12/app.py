@@ -19,13 +19,14 @@ submit = st.sidebar.button('Submit')
 
 if submit:
     filtered_data = data.copy()
-    if car_name:
-        filtered_data = filtered_data[filtered_data['car_name'].str.contains(car_name, case=False)]
+    if car_name is not None:
+        print(car_name)
+        filtered_data = filtered_data[filtered_data['Car_Name'].str.contains(car_name)]
     if selected_transmission:
-        filtered_data = filtered_data[filtered_data['transmission'].isin(selected_transmission)]
+        filtered_data = filtered_data[filtered_data['Transmission'].isin(selected_transmission)]
 
-    filtered_data = filtered_data[(filtered_data['selling_price'] >= min_price) & (filtered_data['selling_price'] <= max_price)]
-    filtered_data = filtered_data[(filtered_data['year'] >= min_year) & (filtered_data['year'] <= max_year)]
+    filtered_data = filtered_data[(filtered_data['Selling_Price'] >= min_price) & (filtered_data['selling_price'] <= max_price)]
+    filtered_data = filtered_data[(filtered_data['Year'] >= min_year) & (filtered_data['year'] <= max_year)]
     
     st.write(filtered_data)
 else:
