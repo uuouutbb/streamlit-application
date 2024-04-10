@@ -25,8 +25,8 @@ if submit:
     if selected_transmission:
         filtered_data = filtered_data[filtered_data['Transmission'].isin(selected_transmission)]
 
-    filtered_data = filtered_data[(filtered_data['Selling_Price'] >= min_price) & (filtered_data['selling_price'] <= max_price)]
-    filtered_data = filtered_data[(filtered_data['Year'] >= min_year) & (filtered_data['year'] <= max_year)]
+    filtered_data = filtered_data[(filtered_data['Selling_Price'] >= min_price) & (filtered_data['Selling_Price'] <= max_price)]
+    filtered_data = filtered_data[(filtered_data['Year'] >= min_year) & (filtered_data['Year'] <= max_year)]
     
     st.write(filtered_data)
 else:
