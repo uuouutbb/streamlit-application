@@ -1,0 +1,24 @@
+1. Create a Github account if you don't have
+2. Get a bit familiar with Github (https://docs.github.com/en/get-started/start-your-journey)
+3. Create a repository for the Streamlit application (https://docs.github.com/en/get-started/start-your-journey/uploading-a-project-to-github)
+4. Build a Streamlit application. More information is mentioned below.
+5. Create Streamlit cloud account and connect it with your github account (https://share.streamlit.io/)
+6. Deploy the app (https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app)
+
+
+Application:
+Use the car_data.csv data to build the application.
+1. Use a sidebar which has the following options:
+a. text box (st.text_input) to input the car_name (optional)
+b. multiselect (st.multiselect) to choose between Manual and/or Automatic (default option is both)
+c. slider (st.slider) to choose a range of selling_price (default: 0 to 20)
+d. slider (st.slider) to choose a range of year (default: 2000 to 2024)
+e. submit button (st.button), which should show the **filtered** data in a table format on the main screen. If no filters are selected, show the original data as it is.
+2. Main screen should show the filtered data in table format or any human readable format.
+
+Pandas: These links will help you to understand pandas and how to use them.
+https://www.w3schools.com/python/pandas/pandas_csv.asp
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.filter.html
+
+Submission:
+Upload your main.py file and paste the deployed code's url on a .txt file. Upload these 2 files.
