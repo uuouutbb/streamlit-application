@@ -8,11 +8,10 @@ from streamlit_option_menu import option_menu
 import altair as alt
 import pickle
 
-os.chdir('/streamlit-application/FinalProject/')
 
 
 def load_data():
-    conn = sqlite3.connect('510project.db')
+    conn = sqlite3.connect('/FinalProject/510project.db')
     query = """
     SELECT
         h.*,
