@@ -320,6 +320,8 @@ def database_page(data):
     st.subheader("Table for the whole joined dataset")
     st.dataframe(data)
 
+    park_rating = pd.read_csv("saved_datasets/park_rating.csv")
+    st.dataframe(park_rating)
 
 
 
