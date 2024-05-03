@@ -1,15 +1,11 @@
 import streamlit as st
 import pandas as pd
-from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 import joblib
 import numpy as np
-from sklearn.linear_model import LinearRegression
 import csv
 import os
 import sqlite3
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 from streamlit_option_menu import option_menu
 import altair as alt
 import pickle
