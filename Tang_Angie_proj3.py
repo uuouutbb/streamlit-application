@@ -296,7 +296,7 @@ def database_page(data):
     st.dataframe(income_data)
 
     st.subheader("High rating parks in Orange County")
-    pd.read("streamlit-application/saved_datasets/park_rating.csv")
+    pd.read_csv("streamlit-application/saved_datasets/park_rating.csv")
     st.dataframe
 
     conn.close()
