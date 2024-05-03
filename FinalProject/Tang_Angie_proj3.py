@@ -7,7 +7,7 @@ import sqlite3
 from streamlit_option_menu import option_menu
 import altair as alt
 import pickle
-os.chdir('/FinalProject/')
+
 
 
 
