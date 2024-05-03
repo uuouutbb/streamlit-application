@@ -7,10 +7,8 @@ import sqlite3
 from streamlit_option_menu import option_menu
 import altair as alt
 import pickle
-import plotly.express as px
 
 
-os.chdir('/Users/guotang/Desktop/510/proj/')
 
 
 def load_data():
