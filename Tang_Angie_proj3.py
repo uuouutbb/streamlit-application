@@ -399,21 +399,21 @@ def map_graph():
     pitch=50,
     )
 
-    # Define the layer to display
-    layer = pdk.Layer(
-        'ScatterplotLayer',
-        data=table,
-        get_position='[longitude, latitude]',
-        get_color='[200, 30, 0, 160]',
-        get_radius=10000,  # Radius in meters
-    )
+    # # Define the layer to display
+    # layer = pdk.Layer(
+    #     'ScatterplotLayer',
+    #     data=table,
+    #     get_position='[longitude, latitude]',
+    #     get_color='[200, 30, 0, 160]',
+    #     get_radius=10000,  # Radius in meters
+    # )
 
-    # Render the map
-    st.pydeck_chart(pdk.Deck(
-        map_style='mapbox://styles/mapbox/light-v9',
-        initial_view_state=view_state,
-        layers=[layer]
-    ))
+    # # Render the map
+    # st.pydeck_chart(pdk.Deck(
+    #     map_style='mapbox://styles/mapbox/light-v9',
+    #     initial_view_state=view_state,
+    #     layers=[layer]
+    # ))
     
 
 
