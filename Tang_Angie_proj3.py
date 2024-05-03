@@ -36,9 +36,9 @@ def load_data():
     return data
 
 def home_page():
+    st.title("Analysis of Community Resources and Their Influence on house Values")
     st.header("Angie Tang")
     st.header("How to Use This Webapp")
-    st.title("Analysis of Community Resources and Their Influence on house Values")
     st.subheader("Interactivity and Navigation")
     st.write("""
     - **Comparative Analysis of High Rating Neighborhood Amenities in Orange County (Line plot)**: Explore the relationship between house prices per square foot and the count of neighborhood amenities. 
@@ -66,6 +66,27 @@ def home_page():
     - **Improvement Opportunities**: The predictive tool currently uses a limited set of features. Expanding this to include more detailed aspects like crime rates, public transport accessibility, and historical price trends could enhance its accuracy and usefulness.
     """)
 
+def question_page():
+    st.subheader("4. Purpose of the Project") 
+    st.write("""
+    - ***riginal Focus***: The project was initially aimed at predicting house values, focusing on the impact of high-rated community resources such as parks, schools, and local income levels on house prices. 
+             The intent was to analyze how amenities and demographic factors influence pricing, and to provide accurate price predictions using a range of features (beds, baths, square footage, year built, nearby amenities).
+    - **Discoveries and Conclusions**
+        **Key Findings**: 
+            **Influence of Parks and Schools**: As hypothesized, the presence of highly-rated parks and schools within a 1-mile radius significantly increases house prices, reflecting the premium buyers place on accessible educational and recreational amenities.
+            **Variable Impact in Different Cities**: In cities like Aliso Viejo, Fullerton, and Laguna Beach, house prices showed an unexpected decrease with improved school accessibility. 
+            This may be attributed to these cities having a higher proportion of older residents or tourists, who may prioritize different features in housing.
+            **Impact of House Size on Price Sensitivity**: Larger homes demonstrated a more pronounced price increase with better amenities, supporting the idea that families, particularly those with children, value these features more.
+            **Local Income vs. House Prices**: Contrary to expectations, only a slight correlation was found between higher local incomes and house prices, possibly due to a demographic with older residents who are less likely to move, thus reducing the impact of income on house prices.
+            **Original Assumptions Revisited**: While the influence of parks and schools was confirmed, other factors like local average income and proximity to grocery stores did not show a clear correlation with house prices.
+    - **Difficulties Encountered**
+             The major challenge was the API limitation, which restricted access to comprehensive historical price data. This limitation hindered the ability to predict future house prices effectively, as the most recent data available was from October 2023.
+    - **Desired Skills**
+             During the project, I wished I had stronger skills in Machine Learning. Having better skills in machine learning could have allowed me to apply more sophisticated models to predict house prices, especially models that can handle large datasets and complex relationships between features.
+    - **Future Directions**
+            **Expanding the Predictive Model**: To augment the project, I would enhance the predictive tool by incorporating additional features such as crime rates, public transportation options, and historical price trends. These factors could provide a more comprehensive view of the factors influencing house prices.
+            **Incorporating Machine Learning**: Implementing more advanced machine learning models to predict price trends based on a broader array of indicators would also be a valuable next step. This could include time series analysis to better understand price fluctuations over time.
+    """)
 
 def statistical_analysis_plots(data):
     st.subheader('Comparative Analysis of High Rating Neighborhood Amenities in Orange County')
@@ -254,16 +275,29 @@ def database_page(data):
     conn = sqlite3.connect('510project.db')
 
     st.subheader("Table for house data")
+    st.write("""This is the dataset downloaded from Rapid Zillow api. Variables includes the basic characteristic of a house, id on zillow, days on zillow,
+             as well as the location info.
+             Api document: https://rapidapi.com/SwongF/api/zillow69/""")
     houses_data = pd.read_sql_query(houses_table_query, conn)
     st.dataframe(houses_data)
 
     st.subheader("Table for Parks, Schools, Grocery Stores within 1 mile from the houses")
+    st.write("""This is the dataset downloaded from Geopify api. It's used for searching places around a specific coordinate. Downloaded using longitude and latitude of a house from the house dataset, set the radius to 1 mile. 
+             Variables includes the name of the place, the category(school, park, grocery store)
+             Api document: https://myprojects.geoapify.com/api/Pf47Z39bYWpsz49G55MD/keys""")
     places_data = pd.read_sql_query(places_table_query, conn)
     st.dataframe(places_data)
 
     st.subheader("Table average income in Orange County by zipcode")
+    st.write("""This dataset contains local average income in Orange County by zipcode.
+             url: https://localistica.com/usa/ca/county/orange/zipcodes/highest-household-income-zipcodes/#google_vignette
+        """)
     income_data = pd.read_sql_query(income_table_query, conn)
     st.dataframe(income_data)
+
+    st.subheader("High rating parks in Orange County")
+    pd.read("saved_datasets/park_rating.csv")
+    st.dataframe
 
     conn.close()
 
@@ -274,7 +308,10 @@ def database_page(data):
 
 
 def main():
+    # Load data from the database
     data = load_data()
+
+    # Sidebar, the main menu
     with st.sidebar:
         selected = option_menu(
         menu_title = "Main Menu",
@@ -283,27 +320,26 @@ def main():
         menu_icon = "cast",
         default_index = 0,
     )
-    if selected == "Statistical Analysis":
+        
+    # Nevigation
+    if selected == "Statistical Analysis": 
+        # Shows the three analysis plots 
         statistical_analysis_plots(data)
         statistical_analysis_charts(data)
         statistical_analysis_scatter(data)
     elif selected == "Home":
+        # Shows the homepage
         home_page()
     elif selected == "Predictive Analysis":
+        # Shows the prediction function of my app
         predictive_analysis_input(data)
     elif selected == "Dataset":
+        # Shows my database tables
         database_page(data)
-
+    elif selected == "Q&A":
+        # Shows the answers to questions from 4 - 8 in the rubric
+        question_page()
 if __name__ == "__main__":
     main()
 
 
-st.sidebar.title("Menu")
-value = st.sidebar.slider(
-    label='Select a value',  # Text displayed above the slider
-    min_value=0,            # Minimum value of the slider
-    max_value=100,          # Maximum value of the slider
-    value=50,               # Initial value of the slider
-    step=5                  # Incremental step of the slider
-)
-menu = ["Home", "Profile", "Settings", "About"]
