@@ -11,7 +11,7 @@ import pickle
 
 
 def load_data():
-    conn = sqlite3.connect('/FinalProject/510project.db')
+    conn = sqlite3.connect('510project.db')
     query = """
     SELECT
         h.*,
