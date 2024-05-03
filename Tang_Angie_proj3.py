@@ -408,12 +408,12 @@ def map_graph():
         get_radius=10000,  # Radius in meters
     )
 
-    # # Render the map
-    # st.pydeck_chart(pdk.Deck(
-    #     map_style='mapbox://styles/mapbox/light-v9',
-    #     initial_view_state=view_state,
-    #     layers=[layer]
-    # ))
+    # Render the map
+    st.pydeck_chart(pdk.Deck(
+        map_style='mapbox://styles/mapbox/light-v9',
+        initial_view_state=view_state,
+        layers=[layer]
+    ))
     
 
 
