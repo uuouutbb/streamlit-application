@@ -410,7 +410,7 @@ def updateHOUSES():
 def places_table():
     conn = sqlite3.connect('510project.db', detect_types=sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
     cur = conn.cursor()
-    df = pd.read_csv("places_around.csv")
+    df = pd.read_csv("saved_datasets/places_around.csv")
     
     # Create table
     cur.execute('DROP TABLE IF EXISTS PLACESAROUND')
@@ -421,6 +421,8 @@ def places_table():
             zpid TEXT,
             name TEXT,
             category TEXT,
+            lon TEXT,
+            lat TEXT,
             FOREIGN KEY (zpid) REFERENCES HOUSES(zpid)
         )''')
     
@@ -429,10 +431,12 @@ def places_table():
         zpid = row['zpid_of_the_house']
         name = row['place name']
         category = row['category']
+        lon = row['lon']
+        lat = row['lat']
 
         cur.execute(
-            'INSERT INTO PLACESAROUND (zpid, name, category) VALUES (?, ?, ?)', 
-        (zpid, name, category))
+            'INSERT INTO PLACESAROUND (zpid, name, category, lon, lat) VALUES (?, ?, ?, ?, ?)', 
+        (zpid, name, category, lon, lat))
     
     table = pd.read_sql_query('SELECT * FROM PLACESAROUND LIMIT 5', conn)
     print(table)
@@ -546,7 +550,9 @@ def csv_places():
     places_around = {
         'zpid_of_the_house': [],
         'place name': [],
-        'category': []
+        'category': [],
+        'lon': [],
+        'lat': []
     }
 
     # Save each place corresponding to the zpid, with specified categories
@@ -554,34 +560,47 @@ def csv_places():
         zpid_of_the_house = []
         place_names = []
         category = []
+        longitude = []
+        latitude = []
 
         for item in ad:
             current_zpid = ad[1]['zpid']
             if 'properties' in item:
                 name = item['properties'].get('name', None)
+                lon = item['properties'].get('lon', None)
+                lat = item['properties'].get('lat', None)
                 if 'categories' in item['properties']:
                     for c in item['properties']['categories']:
                         if 'supermarket' in c:
                             zpid_of_the_house.append(current_zpid)
                             category.append('grocery store')
-                            place_names.append(name)             
+                            place_names.append(name)   
+                            longitude.append(lon)
+                            latitude.append(lat)          
                         elif 'park' in c:     
                             zpid_of_the_house.append(current_zpid)
                             category.append('park')
                             place_names.append(name)
+                            longitude.append(lon)
+                            latitude.append(lat) 
                         elif 'school' in c:
                             zpid_of_the_house.append(current_zpid)
                             category.append('school')
                             place_names.append(name)
+                            longitude.append(lon)
+                            latitude.append(lat) 
     
         places_around['zpid_of_the_house'].extend(zpid_of_the_house)
         places_around['place name'].extend(place_names)
         places_around['category'].extend(category)
+        places_around['lon'].extend(longitude)
+        places_around['lat'].extend(latitude)
 
         
     df = pd.DataFrame(places_around)
     df = df.drop_duplicates(subset=['zpid_of_the_house', 'place name'])  
     df.to_csv('places_around.csv')
+
 
 
 # %% [markdown]
