@@ -66,11 +66,12 @@ def home_page():
     """)
 
 def question_page():
-    st.subheader("4. Purpose of the Project") 
+    st.header("Answers to the research Questions") 
+    st.subheader("Purpose of the Project") 
     st.write("""
-    - **Original Focus**: The project was initially aimed at predicting house values, focusing on the impact of high-rated community resources such as parks, schools, and local income levels on house prices. 
+    **Original Focus**: The project was initially aimed at predicting house values, focusing on the impact of high-rated community resources such as parks, schools, and local income levels on house prices. 
              The intent was to analyze how amenities and demographic factors influence pricing, and to provide accurate price predictions using a range of features (beds, baths, square footage, year built, nearby amenities).""")
-    st.write("- **Discoveries and Conclusions**")
+    st.subheader("Discoveries and Conclusions")
     st.write("**Key Findings**:")
     st.write(" **Influence of Parks and Schools**: As hypothesized, the presence of highly-rated parks and schools within a 1-mile radius significantly increases house prices, reflecting the premium buyers place on accessible educational and recreational amenities.")
     st.write("**Variable Impact in Different Cities**: In cities like Aliso Viejo, Fullerton, and Laguna Beach, house prices showed an unexpected decrease with improved school accessibility.")
@@ -78,11 +79,11 @@ def question_page():
     st.write("**Impact of House Size on Price Sensitivity**: Larger homes demonstrated a more pronounced price increase with better amenities, supporting the idea that families, particularly those with children, value these features more.")
     st.write("**Local Income vs. House Prices**: Contrary to expectations, only a slight correlation was found between higher local incomes and house prices, possibly due to a demographic with older residents who are less likely to move, thus reducing the impact of income on house prices.")
     st.write("**Original Assumptions Revisited**: While the influence of parks and schools was confirmed, other factors like local average income and proximity to grocery stores did not show a clear correlation with house prices.")
-    st.write("- **Difficulties Encountered**")
+    st.subheader("Difficulties Encountered")
     st.write("The major challenge was the API limitation, which restricted access to comprehensive historical price data. This limitation hindered the ability to predict future house prices effectively, as the most recent data available was from October 2023.")
-    st.write("- **Desired Skills**")
+    st.subheader("Desired Skills")
     st.write("During the project, I wished I had stronger skills in Machine Learning. Having better skills in machine learning could have allowed me to apply more sophisticated models to predict house prices, especially models that can handle large datasets and complex relationships between features.")
-    st.write("- **Future Directions**")
+    st.subheader("Future Directions")
     st.write("**Expanding the Predictive Model**: To augment the project, I would enhance the predictive tool by incorporating additional features such as crime rates, public transportation options, and historical price trends. These factors could provide a more comprehensive view of the factors influencing house prices.")
     st.write("**Incorporating Machine Learning**: Implementing more advanced machine learning models to predict price trends based on a broader array of indicators would also be a valuable next step. This could include time series analysis to better understand price fluctuations over time.")
 
@@ -314,7 +315,7 @@ def main():
     with st.sidebar:
         selected = option_menu(
         menu_title = "Main Menu",
-        options = ["Home","Statistical Analysis","Predictive Analysis","Q&A","Dataset"],
+        options = ["Home","Statistical Analysis","Predictive Analysis","Research Questions","Dataset"],
         icons = ["house","graph-up-arrow","house-check", "book", "database"],
         menu_icon = "cast",
         default_index = 0,
@@ -335,8 +336,8 @@ def main():
     elif selected == "Dataset":
         # Shows my database tables
         database_page(data)
-    elif selected == "Q&A":
-        # Shows the answers to questions from 4 - 8 in the rubric
+    elif selected == "Research Questions":
+        # Shows the answers to Research Questions from 4 - 8 in the rubric
         question_page()
 if __name__ == "__main__":
     main()
