@@ -421,8 +421,8 @@ def places_table():
             zpid TEXT,
             name TEXT,
             category TEXT,
-            lon TEXT,
-            lat TEXT,
+            lon DOUBLE,
+            lat DOUBLE,
             FOREIGN KEY (zpid) REFERENCES HOUSES(zpid)
         )''')
     

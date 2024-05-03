@@ -57,6 +57,8 @@ def home_page():
              Adjust the number of bedrooms to see how the prices fluctuate.
              The bar chart helps visualize the influence of amenities on homes of different sizes, suggesting tailored strategies for different types of properties.
              """)
+    st.write("""- **Geographic Distribution of Resources**: Explore the spatial distribution of key resources and amenities across different regions with the interactive map. This tool provides a comprehensive visualization of various categories, highlighting how they are spread geographically. 
+             Users can selectively view different categories to understand regional disparities or concentrations of resources.""")
     st.write("- **Predictive Analysis**: Estimate house prices based on selected features. This tool is designed for potential home buyers or investors to forecast house prices tailored to specific preferences.")
 
     st.subheader("Conclusions from the Analysis")
@@ -188,6 +190,57 @@ def statistical_analysis_charts(data):
 
     st.altair_chart(chart, use_container_width=True)
 
+def map_graph():
+
+    st.subheader("Geographic Distribution of Resources")
+    conn = sqlite3.connect('510project.db')
+    query = ("""
+    SELECT DISTINCT p.lon, p.lat, p.category
+    FROM PLACESAROUND p
+    """)
+    table = pd.read_sql_query(query, conn)
+    conn.close()
+    
+    mean_lat = table['lat'].mean()
+    mean_lon = table['lon'].mean()
+    
+    category_color_map = {
+    'school': [255, 0, 0, 128],  # Red
+    'park': [0, 255, 0, 128],  # Green
+    'grocery store': [0, 0, 255, 128],  # Blue
+    }
+    table['color'] = table['category'].map(category_color_map)
+    
+    categories = table['category'].unique().tolist()
+
+    # Widget for selecting categories. Default is selecting all categories.
+    selected_categories = st.multiselect('Select Categories', categories, default=categories)
+
+    # Filter the DataFrame based on selected categories
+    filtered_table = table[table['category'].isin(selected_categories)]
+
+    view_state = pdk.ViewState(
+    latitude=mean_lat,
+    longitude=mean_lon,
+    zoom=10,
+    pitch=50,
+    )
+
+    # Define the layer to display
+    layer = pdk.Layer(
+        'ScatterplotLayer',
+        data=filtered_table,
+        get_position='[lon, lat]',
+        get_color='color',
+        get_radius=100,
+    )
+
+    # Render the map
+    st.pydeck_chart(pdk.Deck(
+        map_style='mapbox://styles/mapbox/light-v9',
+        initial_view_state=view_state,
+        layers=[layer]
+    ))
 
 def predictive_analysis_calculate(inputs):
     wholeTable_encoded = pd.read_csv("encoded_house_data_whole.csv")
