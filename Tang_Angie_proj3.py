@@ -400,7 +400,7 @@ def map_graph():
     
     category_color_map = {
     'school': [255, 0, 0, 128],  # Red
-    'park': [0, 255, 0, 128],  # Green
+    'park': [50, 205, 50, 128],  # Green
     'grocery store': [0, 0, 255, 128],  # Blue
     }
     table['color'] = table['category'].map(category_color_map)
