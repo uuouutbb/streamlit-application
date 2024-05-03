@@ -3,7 +3,6 @@ altair==5.3.0
 markdown-it-py==3.0.0
 
 matplotlib==3.8.3
-matplotlib-inline @ file:///home/conda/feedstock_root/build_artifacts/matplotlib-
 
 numpy==1.26.4
 pandas==2.2.1
