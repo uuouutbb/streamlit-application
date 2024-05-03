@@ -8,7 +8,7 @@ from streamlit_option_menu import option_menu
 import altair as alt
 import pickle
 
-os.chdir('/FinalProject/')
+os.chdir('/streamlit-application/FinalProject/')
 
 
 def load_data():
