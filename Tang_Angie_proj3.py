@@ -39,18 +39,33 @@ def home_page():
     st.header("Angie Tang")
     st.header("How to Use This Webapp")
     st.title("Analysis of Community Resources and Their Influence on house Values")
-    st.subheader("Features")
+    st.subheader("Interactivity and Navigation")
     st.write("""
-    - **Statistical Analysis**: Explore the relationship between house prices per square foot and the count of neighborhood amenities. 
-    You can select specific city within Orange County or view data for the entire Orange County by default.
+    - **Comparative Analysis of High Rating Neighborhood Amenities in Orange County (Line plot)**: Explore the relationship between house prices per square foot and the count of neighborhood amenities. 
+             You can select specific city within Orange County or view data for the entire Orange County by default.
+             The line plot provides insights into how amenities add value to properties on a per-square-foot basis across different locales.
+    - **Analysis of Amenities Impact on Price by Bedroom Count (Bar chart)**: Investigate how neighborhood amenities impact house prices based on the size of the house (measured by the number of bedrooms). 
+             Adjust the number of bedrooms to see how the prices fluctuate.
+             The bar chart helps visualize the influence of amenities on homes of different sizes, suggesting tailored strategies for different types of properties.
+    - **Local Income vs Price in Orange County (Scatter Plot)**: Examine the relationship between local income and house prices in various zip codes to determine the influence of economic status on property values.
+             The scatter plot offers a perspective on how average local incomes correlate with house prices, indicating economic factors at play.      
     - **Predictive Analysis**: Estimate house prices based on selected features. This tool is designed for potential home buyers or investors to forecast house prices tailored to specific preferences.
     """)
 
 
     st.subheader("Conclusions from the Analysis")
     st.write("""
-    Through my statistical analysis, it can be observed that the presence of highly-rated parks (top 120 on Yelp) and schools (with ratings of 8 or higher) within a 1-mile radius significantly impacts house prices. However, the proximity to popular grocery stores, despite their convenience, does not show a substantial influence on the pricing. This insight can be particularly useful for buyers who value educational and recreational amenities.
+    - **Influence of Parks and Schools**: The presence of highly-rated parks and schools within a 1-mile radius notably boosts house prices. This trend underscores the value that buyers place on educational and recreational facilities close to home.
+    - **Impact of House Size on Price Sensitivity**: Larger houses show a steeper increase in price with the addition of amenities such as parks and schools, likely because larger families with children prioritize these features.
+    - **Local Income vs. House Prices**: Only a marginal increase in house prices is observed with higher local incomes. This could be attributed to a demographic with a higher proportion of older residents who are less inclined to move, thus dampening the income effect on house prices.
     """)
+    st.subheader("Major \"Gotchas\"")
+    st.write("""
+    - **Performance Issues**: Due to api limitation, there might not have enough data for a accurate analysis. Some cities are too small to have enough data for visulization and prediction. 
+             Therefore, I have put the cities with more population on the top for the city select boxes. Please choose a city showed on top of the list.
+    - **Improvement Opportunities**: The predictive tool currently uses a limited set of features. Expanding this to include more detailed aspects like crime rates, public transport accessibility, and historical price trends could enhance its accuracy and usefulness.
+    """)
+
 
 def statistical_analysis_plots(data):
     st.subheader('Comparative Analysis of High Rating Neighborhood Amenities in Orange County')
