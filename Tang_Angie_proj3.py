@@ -389,8 +389,13 @@ def map_graph():
     st.subheader("Geographic Distribution of Resources")
     conn = sqlite3.connect('510project.db')
     query = ("""
-    SELECT DISTINCT p.lon, p.lat, p.category
-    FROM PLACESAROUND p
+             SELECT a.zpid
+             FROM PLACESCOUNT a
+             JOIN
+                (SELECT DISTINCT p.lon, p.lat, p.category
+                FROM PLACESAROUND p)
+             on a.zpid = p.zpid
+             
     """)
     table = pd.read_sql_query(query, conn)
     conn.close()
