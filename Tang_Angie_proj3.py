@@ -391,6 +391,7 @@ def map_graph():
     FROM PLACESAROUND p
     """)
     table = pd.read_sql_query(query, conn)
+    conn.close()
     view_state = pdk.ViewState(
     latitude=table['lat'],
     longitude=table['lon'],
@@ -413,7 +414,7 @@ def map_graph():
         initial_view_state=view_state,
         layers=[layer]
     ))
-    conn.close()
+    
 
 
 
@@ -436,7 +437,7 @@ def main():
         # Shows the three analysis plots 
         statistical_analysis_plots(data)
         statistical_analysis_charts(data)
-        map_graph()
+        # map_graph()
     elif selected == "Home":
         # Shows the homepage
         home_page()
