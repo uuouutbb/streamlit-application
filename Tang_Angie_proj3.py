@@ -69,14 +69,15 @@ def home_page():
 def question_page():
     st.subheader("4. Purpose of the Project") 
     st.write("""
-    - ***riginal Focus***: The project was initially aimed at predicting house values, focusing on the impact of high-rated community resources such as parks, schools, and local income levels on house prices. 
+    - **Original Focus**: The project was initially aimed at predicting house values, focusing on the impact of high-rated community resources such as parks, schools, and local income levels on house prices. 
              The intent was to analyze how amenities and demographic factors influence pricing, and to provide accurate price predictions using a range of features (beds, baths, square footage, year built, nearby amenities).
     - **Discoveries and Conclusions**
         **Key Findings**: 
             **Influence of Parks and Schools**: As hypothesized, the presence of highly-rated parks and schools within a 1-mile radius significantly increases house prices, reflecting the premium buyers place on accessible educational and recreational amenities.
             **Variable Impact in Different Cities**: In cities like Aliso Viejo, Fullerton, and Laguna Beach, house prices showed an unexpected decrease with improved school accessibility. 
             This may be attributed to these cities having a higher proportion of older residents or tourists, who may prioritize different features in housing.
-            **Impact of House Size on Price Sensitivity**: Larger homes demonstrated a more pronounced price increase with better amenities, supporting the idea that families, particularly those with children, value these features more.
+            
+             **Impact of House Size on Price Sensitivity**: Larger homes demonstrated a more pronounced price increase with better amenities, supporting the idea that families, particularly those with children, value these features more.
             **Local Income vs. House Prices**: Contrary to expectations, only a slight correlation was found between higher local incomes and house prices, possibly due to a demographic with older residents who are less likely to move, thus reducing the impact of income on house prices.
             **Original Assumptions Revisited**: While the influence of parks and schools was confirmed, other factors like local average income and proximity to grocery stores did not show a clear correlation with house prices.
     - **Difficulties Encountered**
