@@ -7,7 +7,7 @@ import sqlite3
 from streamlit_option_menu import option_menu
 import altair as alt
 import pickle
-
+import pydeck as pdk
 
 # Load data from the database
 def load_data():
@@ -188,15 +188,6 @@ def statistical_analysis_charts(data):
 
     st.altair_chart(chart, use_container_width=True)
 
-def statistical_analysis_scatter(data):
-    # Scatter plot for local income and price
-    st.subheader("Local Income vs Price in Orange County")
-    st.scatter_chart(
-        data,
-        x='local_income',
-        y=['price_per_sqft'],
-        size=100 
-    )
 
 def predictive_analysis_calculate(inputs):
     wholeTable_encoded = pd.read_csv("encoded_house_data_whole.csv")
@@ -340,7 +331,36 @@ def database_page(data):
     st.subheader("Table for the whole joined dataset")
     st.dataframe(data)
 
+def map_graph():
+    conn = sqlite3.connect('510project.db')
+    query = ("""
+    SELECT DISTINCT p.lon, p.lat
+    FROM PLACESAROUND p
+    """)
+    table = pd.read_sql_query(query, conn)
+    view_state = pdk.ViewState(
+    latitude=table['lat'],
+    longitude=table['lon'],
+    zoom=10,
+    pitch=50,
+    )
 
+    # Define the layer to display
+    layer = pdk.Layer(
+        'ScatterplotLayer',
+        data=table,
+        get_position='[longitude, latitude]',
+        get_color='[200, 30, 0, 160]',
+        get_radius=10000,  # Radius in meters
+    )
+
+    # Render the map
+    st.pydeck_chart(pdk.Deck(
+        map_style='mapbox://styles/mapbox/light-v9',
+        initial_view_state=view_state,
+        layers=[layer]
+    ))
+    conn.close()
 
 
 
@@ -363,7 +383,7 @@ def main():
         # Shows the three analysis plots 
         statistical_analysis_plots(data)
         statistical_analysis_charts(data)
-        statistical_analysis_scatter(data)
+        map_graph()
     elif selected == "Home":
         # Shows the homepage
         home_page()
