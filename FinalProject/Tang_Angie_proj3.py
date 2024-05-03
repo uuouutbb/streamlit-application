@@ -179,7 +179,7 @@ def predictive_analysis_calculate(inputs):
         X['livingArea'] = inputs['livingArea']
         X['builtYear'] = inputs['builtYear']
         X[f'city_{inputs["city"]}'] = True
-        X[f'propertyType_{inputs['propertyType']}'] = True
+        X[f'propertyType_{inputs["propertyType"]}'] = True
         X['grocery_count'] = inputs['grocery_count']
         X['park_count'] = inputs['park_count']
         X['school_count'] = inputs['school_count']
