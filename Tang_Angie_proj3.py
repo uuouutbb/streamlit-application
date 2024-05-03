@@ -9,7 +9,7 @@ import altair as alt
 import pickle
 
 
-
+# Load data from the database
 def load_data():
     conn = sqlite3.connect('510project.db')
     query = """
@@ -35,7 +35,9 @@ def load_data():
 
     return data
 
+# Display the main page
 def home_page():
+    
     st.title("Analysis of Community Resources and Their Influence on house Values")
     st.header("Angie Tang")
     st.header("How to Use This Webapp")
@@ -65,7 +67,9 @@ def home_page():
     - **Improvement Opportunities**: The predictive tool currently uses a limited set of features. Expanding this to include more detailed aspects like crime rates, public transport accessibility, and historical price trends could enhance its accuracy and usefulness.
     """)
 
+# Display reasearch question page
 def question_page():
+    
     st.header("Answers to the research Questions") 
     st.subheader("Purpose of the Project") 
     st.write("""
@@ -87,22 +91,24 @@ def question_page():
     st.write("**Expanding the Predictive Model**: To augment the project, I would enhance the predictive tool by incorporating additional features such as crime rates, public transportation options, and historical price trends. These factors could provide a more comprehensive view of the factors influencing house prices.")
     st.write("**Incorporating Machine Learning**: Implementing more advanced machine learning models to predict price trends based on a broader array of indicators would also be a valuable next step. This could include time series analysis to better understand price fluctuations over time.")
 
-
+# Display the nalysis of amenities in OC, interative design for city selection
 def statistical_analysis_plots(data):
+
     st.subheader('Comparative Analysis of High Rating Neighborhood Amenities in Orange County')
     popular_cities = ['Anaheim', 'Costa Mesa', 'Laguna Beach', 'Irvine', 'Santa Ana', 'San Clemente']
     other_cities = sorted(set(data['city']) - set(popular_cities))
+    # Prioritize cities with most population, and combine the list
     all_cities = ['All Cities in Orange County'] + popular_cities + other_cities
     
     city = st.selectbox('Select a city or view all:', all_cities)
 
+    # By default, display data for the entire OC
     if city != 'All Cities in Orange County':
         filtered_df = data[data['city'] == city]
     else:
         filtered_df = data  
 
     yfeature = 'price_per_sqft'
-
 
     long_df = pd.DataFrame()
 
@@ -112,6 +118,7 @@ def statistical_analysis_plots(data):
         'school_count': 'Schools'
     }
 
+    # Concat park, school and grocery stores, so they can be in the same plot to be compared.
     for feature in feature_label_mapping.keys():
         if feature in filtered_df.columns:
             temp_df = filtered_df.groupby(feature)[yfeature].median().reset_index()
@@ -120,6 +127,7 @@ def statistical_analysis_plots(data):
             long_df = pd.concat([long_df, temp_df])
 
 
+    # Display the plot, with title and labels
     if not long_df.empty:
         min_price = long_df['median_price_per_sqft'].min()
         max_price = long_df['median_price_per_sqft'].max()
@@ -147,6 +155,7 @@ def statistical_analysis_charts(data):
     # Filter data based on selections
     filtered_data = data[(data['bedrooms'] == bedrooms)]
     st.subheader(f'{bedrooms} bedrooms')
+
     # Prepare data for the bar chart
     results = []
     amenity_types = ['grocery_count', 'park_count', 'school_count']
@@ -175,6 +184,7 @@ def statistical_analysis_charts(data):
     st.altair_chart(chart, use_container_width=True)
 
 def statistical_analysis_scatter(data):
+    # Scatter plot for local income and price
     st.subheader("Local Income vs Price in Orange County")
     st.scatter_chart(
         data,
@@ -219,6 +229,11 @@ def predictive_analysis_calculate(inputs):
     }
 
 def predictive_analysis_input(data):
+
+    # read data from already loaded data
+    st.header("Predict a house price!")
+
+    # Interactive user inputs
     col1, col2 = st.columns(2)
     with col1:
         popular_cities = ['Anaheim', 'Costa Mesa', 'Laguna Beach', 'Irvine', 'Santa Ana', 'San Clemente']
@@ -267,13 +282,17 @@ def predictive_analysis_input(data):
         st.subheader(f"Predicted House Price: ${predicted_price:,.2f}")
 
 def database_page(data):
-    # Houses database
-    
+
+    # Houses table
     houses_table_query = """SELECT * FROM HOUSES"""
+    # Amenities table
     places_table_query = """SELECT * FROM PLACESAROUND"""
+    # Local income table
     income_table_query= """SELECT * FROM OCINCOMEBYZIP"""
+
     conn = sqlite3.connect('510project.db')
 
+    # Read queries and display the tables
     st.subheader("Table for house data")
     st.write("""This is the dataset downloaded from Rapid Zillow api. Variables includes the basic characteristic of a house, id on zillow, days on zillow,
              as well as the location info.
@@ -295,12 +314,9 @@ def database_page(data):
     income_data = pd.read_sql_query(income_table_query, conn)
     st.dataframe(income_data)
 
-    st.subheader("High rating parks in Orange County")
-    pd.read_csv("saved_datasets/park_rating.csv")
-    st.dataframe
-
     conn.close()
 
+    # The final join data set for predictive analysis
     st.subheader("Table for the whole joined dataset")
     st.dataframe(data)
 
