@@ -42,9 +42,8 @@ def home_page():
     st.header("Angie Tang")
 
     st.subheader("How to Use This Webapp")
-    st.subheader("Navigation")
+    st.subheader("Navigation and Interactivity")
     st.write("""Explore the application through the sidebar, which serves as the main menu. Here\'s what you can find:
-             
         - **Home Page(here)**: An introduction to the project, outlining its purpose and scope.
         - **Statistical Analysis**: Interactive visualizations that display the dataset, offering insights into how different factors influence house prices.
         - **Predictive Analysis**: A tool that allows you to estimate the value of a house based on desired characteristics and the number of nearby amenities.
