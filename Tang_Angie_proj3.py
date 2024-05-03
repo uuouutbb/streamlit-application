@@ -387,6 +387,7 @@ def database_page(data):
 def map_graph():
 
     st.subheader("Geographic Distribution of Resources")
+    st.write("Including high rating schools, parks and grocery stores")
     table = pd.read_csv("saved_datasets/places_filter.csv")
     
     mean_lat = table['lat'].mean()
