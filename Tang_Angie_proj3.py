@@ -40,19 +40,19 @@ def home_page():
     
     st.title("Analysis of Community Resources and Their Influence on house Values")
     st.header("Angie Tang")
-    st.header("How to Use This Webapp")
-    st.subheader("Interactivity and Navigation")
-    st.write("""
-    - **Comparative Analysis of High Rating Neighborhood Amenities in Orange County (Line plot)**: Explore the relationship between house prices per square foot and the count of neighborhood amenities.""")
-    st.write("You can select specific city within Orange County or view data for the entire Orange County by default.")
-    st.write("The line plot provides insights into how amenities add value to properties on a per-square-foot basis across different locales.")
-    st.write("""- **Analysis of Amenities Impact on Price by Bedroom Count (Bar chart)**: Investigate how neighborhood amenities impact house prices based on the size of the house (measured by the number of bedrooms).
-             Adjust the number of bedrooms to see how the prices fluctuate.""")
-    st.write("The bar chart helps visualize the influence of amenities on homes of different sizes, suggesting tailored strategies for different types of properties.")
-    st.write("- **Local Income vs Price in Orange County (Scatter Plot)**: Examine the relationship between local income and house prices in various zip codes to determine the influence of economic status on property values.")
-    st.write("The scatter plot offers a perspective on how average local incomes correlate with house prices, indicating economic factors at play.")
-    st.write("- **Predictive Analysis**: Estimate house prices based on selected features. This tool is designed for potential home buyers or investors to forecast house prices tailored to specific preferences.")
 
+    st.subheader("How to Use This Webapp")
+    st.subheader("Interactivity and Navigation")
+    st.write("""- **Comparative Analysis of High Rating Neighborhood Amenities in Orange County (Line plot)**: Explore the relationship between house prices per square foot and the count of neighborhood amenities. 
+             You can select specific city within Orange County or view data for the entire Orange County by default. The line plot provides insights into how amenities add value to properties on a per-square-foot basis across different locales.""")
+    st.write("""- **Analysis of Amenities Impact on Price by Bedroom Count (Bar chart)**: Investigate how neighborhood amenities impact house prices based on the size of the house (measured by the number of bedrooms).
+             Adjust the number of bedrooms to see how the prices fluctuate.
+             The bar chart helps visualize the influence of amenities on homes of different sizes, suggesting tailored strategies for different types of properties.
+             """)
+    st.write("""- **Local Income vs Price in Orange County (Scatter Plot)**: Examine the relationship between local income and house prices in various zip codes to determine the influence of economic status on property values.
+             The scatter plot offers a perspective on how average local incomes correlate with house prices, indicating economic factors at play.
+             """)
+    st.write("- **Predictive Analysis**: Estimate house prices based on selected features. This tool is designed for potential home buyers or investors to forecast house prices tailored to specific preferences.")
 
     st.subheader("Conclusions from the Analysis")
     st.write("""
@@ -60,6 +60,7 @@ def home_page():
     - **Impact of House Size on Price Sensitivity**: Larger houses show a steeper increase in price with the addition of amenities such as parks and schools, likely because larger families with children prioritize these features.
     - **Local Income vs. House Prices**: Only a marginal increase in house prices is observed with higher local incomes. This could be attributed to a demographic with a higher proportion of older residents who are less inclined to move, thus dampening the income effect on house prices.
     """)
+    
     st.subheader("Major \"Gotchas\"")
     st.write("""
     - **Performance Issues**: Due to api limitation, there might not have enough data for a accurate analysis. Some cities are too small to have enough data for visulization and prediction.
