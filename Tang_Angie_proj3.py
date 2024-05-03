@@ -42,15 +42,21 @@ def home_page():
     st.header("Angie Tang")
 
     st.subheader("How to Use This Webapp")
-    st.subheader("Interactivity and Navigation")
+    st.subheader("Navigation")
+    st.write("""Explore the application through the sidebar, which serves as the main menu. Here\'s what you can find:
+             
+        - **Home Page(here)**: An introduction to the project, outlining its purpose and scope.
+        - **Statistical Analysis**: Interactive visualizations that display the dataset, offering insights into how different factors influence house prices.
+        - **Predictive Analysis**: A tool that allows you to estimate the value of a house based on desired characteristics and the number of nearby amenities.
+        - **Research Questions**: My responses to key research questions, detailing findings and conclusions from the study.
+        - **Dataset**: Access and view the database used for this project, including all underlying data and sources.
+        """)
+    st.subheader("Interactivity")
     st.write("""- **Comparative Analysis of High Rating Neighborhood Amenities in Orange County (Line plot)**: Explore the relationship between house prices per square foot and the count of neighborhood amenities. 
              You can select specific city within Orange County or view data for the entire Orange County by default. The line plot provides insights into how amenities add value to properties on a per-square-foot basis across different locales.""")
     st.write("""- **Analysis of Amenities Impact on Price by Bedroom Count (Bar chart)**: Investigate how neighborhood amenities impact house prices based on the size of the house (measured by the number of bedrooms).
              Adjust the number of bedrooms to see how the prices fluctuate.
              The bar chart helps visualize the influence of amenities on homes of different sizes, suggesting tailored strategies for different types of properties.
-             """)
-    st.write("""- **Local Income vs Price in Orange County (Scatter Plot)**: Examine the relationship between local income and house prices in various zip codes to determine the influence of economic status on property values.
-             The scatter plot offers a perspective on how average local incomes correlate with house prices, indicating economic factors at play.
              """)
     st.write("- **Predictive Analysis**: Estimate house prices based on selected features. This tool is designed for potential home buyers or investors to forecast house prices tailored to specific preferences.")
 
@@ -58,7 +64,6 @@ def home_page():
     st.write("""
     - **Influence of Parks and Schools**: The presence of highly-rated parks and schools within a 1-mile radius notably boosts house prices. This trend underscores the value that buyers place on educational and recreational facilities close to home.
     - **Impact of House Size on Price Sensitivity**: Larger houses show a steeper increase in price with the addition of amenities such as parks and schools, likely because larger families with children prioritize these features.
-    - **Local Income vs. House Prices**: Only a marginal increase in house prices is observed with higher local incomes. This could be attributed to a demographic with a higher proportion of older residents who are less inclined to move, thus dampening the income effect on house prices.
     """)
 
     st.subheader("Major \"Gotchas\"")
@@ -74,15 +79,16 @@ def question_page():
     st.header("Answers to the research Questions") 
     st.subheader("Purpose of the Project") 
     st.write("""
-    **Original Focus**: The project was initially aimed at predicting house values, focusing on the impact of high-rated community resources such as parks, schools, and local income levels on house prices. 
-             The intent was to analyze how amenities and demographic factors influence pricing, and to provide accurate price predictions using a range of features (beds, baths, square footage, year built, nearby amenities).""")
+    **Original Focus**: The project was initially aimed at predicting house values. Now specifically focuses on the impact of high-rated community resources such as parks, schools on house prices. 
+             The goal is to explore how these amenities influence property values. A comprehensive set of property features is utilized—including the number of 
+             bedrooms, bathrooms, square footage, and year built—combined with the proximity to key local amenities. This approach aims to determine whether enhancements 
+             in local amenities correspond to an increase in house values, thereby enabling more accurate price predictions.""")
     st.subheader("Discoveries and Conclusions")
     st.write("**Key Findings**:")
     st.write(" **Influence of Parks and Schools**: As hypothesized, the presence of highly-rated parks and schools within a 1-mile radius significantly increases house prices, reflecting the premium buyers place on accessible educational and recreational amenities.")
     st.write("**Variable Impact in Different Cities**: In cities like Aliso Viejo, Fullerton, and Laguna Beach, house prices showed an unexpected decrease with improved school accessibility. This may be attributed to these cities having a higher proportion of older residents or tourists, who may prioritize different features in housing.")
     st.write("**Impact of House Size on Price Sensitivity**: Larger homes demonstrated a more pronounced price increase with better amenities, supporting the idea that families, particularly those with children, value these features more.")
-    st.write("**Local Income vs. House Prices**: Contrary to expectations, only a slight correlation was found between higher local incomes and house prices, possibly due to a demographic with older residents who are less likely to move, thus reducing the impact of income on house prices.")
-    st.write("**Original Assumptions Revisited**: While the influence of parks and schools was confirmed, other factors like local average income and proximity to grocery stores did not show a clear correlation with house prices.")
+    st.write("**Original Assumptions Revisited**: While the influence of parks and schools was confirmed, other factors like proximity to grocery stores did not show a clear correlation with house prices.")
     st.subheader("Difficulties Encountered")
     st.write("The major challenge was the API limitation, which restricted access to comprehensive historical price data. This limitation hindered the ability to predict future house prices effectively, as the most recent data available was from October 2023.")
     st.subheader("Desired Skills")
@@ -307,21 +313,35 @@ def database_page(data):
     places_data = pd.read_sql_query(places_table_query, conn)
     st.dataframe(places_data)
 
-    st.subheader("Table average income in Orange County by zipcode")
-    st.write("""This dataset contains local average income in Orange County by zipcode.
-             url: https://localistica.com/usa/ca/county/orange/zipcodes/highest-household-income-zipcodes/#google_vignette
-        """)
-    income_data = pd.read_sql_query(income_table_query, conn)
-    st.dataframe(income_data)
+    # st.subheader("Table average income in Orange County by zipcode")
+    # st.write("""This dataset contains local average income in Orange County by zipcode.
+    #          url: https://localistica.com/usa/ca/county/orange/zipcodes/highest-household-income-zipcodes/#google_vignette
+    #     """)
+    # income_data = pd.read_sql_query(income_table_query, conn)
+    # st.dataframe(income_data)
 
     conn.close()
+
+    st.subheader("Top 120 High Rating Parks in Orange County from yelp")
+    st.write("url: https://www.yelp.com/search?cflt=parks&find_loc=orange+county%2C+CA&start=0")
+    park_rating = pd.read_csv("saved_datasets/park_rating.csv")
+    st.dataframe(park_rating)
+
+    st.subheader("Top 10 Most popular grocery stores in California from StrawPoll")
+    st.write("url: https://strawpoll.com/most-popular-grocery-store-california")
+    grocery_rating = pd.read_csv("saved_datasets/grocery_rating.csv")
+    st.dataframe(grocery_rating)
+
+    st.subheader("School with score >= 8 in Orange County, from school-ratings.com")
+    st.write("url: https://school-ratings.com/counties/Orange.html")
+    school_rating = pd.read_csv("saved_datasets/school_high_rating.csv")
+    st.dataframe(school_rating)
 
     # The final join data set for predictive analysis
     st.subheader("Table for the whole joined dataset")
     st.dataframe(data)
 
-    park_rating = pd.read_csv("saved_datasets/park_rating.csv")
-    st.dataframe(park_rating)
+
 
 
 
