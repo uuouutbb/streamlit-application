@@ -387,18 +387,7 @@ def database_page(data):
 def map_graph():
 
     st.subheader("Geographic Distribution of Resources")
-    conn = sqlite3.connect('510project.db')
-    query = ("""
-             SELECT a.zpid
-             FROM PLACESCOUNT a
-             JOIN
-                (SELECT DISTINCT p.lon, p.lat, p.category
-                FROM PLACESAROUND p)
-             on a.zpid = p.zpid
-             
-    """)
-    table = pd.read_sql_query(query, conn)
-    conn.close()
+    table = pd.read_csv("saved_datasets/places_filter.csv")
     
     mean_lat = table['lat'].mean()
     mean_lon = table['lon'].mean()
