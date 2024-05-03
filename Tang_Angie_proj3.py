@@ -392,6 +392,7 @@ def map_graph():
     """)
     table = pd.read_sql_query(query, conn)
     conn.close()
+
     view_state = pdk.ViewState(
     latitude=table['lat'],
     longitude=table['lon'],
@@ -412,7 +413,7 @@ def map_graph():
     st.pydeck_chart(pdk.Deck(
         map_style='mapbox://styles/mapbox/light-v9',
         initial_view_state=view_state,
-        layers=[layer]
+        layers=layer
     ))
     
 
