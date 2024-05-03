@@ -6,8 +6,6 @@ matplotlib==3.8.3
 matplotlib-inline @ file:///home/conda/feedstock_root/build_artifacts/matplotlib-
 
 numpy==1.26.4
-
-panda==0.3.1
 pandas==2.2.1
 
 plotly==5.22.0
