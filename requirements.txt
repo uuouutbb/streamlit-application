@@ -14,4 +14,4 @@ streamlit-option-menu==0.3.12
 
 
 scikit-learn==1.4.2
-pydeck
+pydeck==0.8.1b0
