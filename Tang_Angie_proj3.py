@@ -43,13 +43,13 @@ def home_page():
 
     st.subheader("How to Use This Webapp")
     st.subheader("Navigation and Interactivity")
-    st.write("""Explore the application through the sidebar, which serves as the main menu. Here\'s what you can find:
-             - **Home Page(here)**: An introduction to the project, outlining its purpose and scope.
-             - **Statistical Analysis**: Interactive visualizations that display the dataset, offering insights into how different factors influence house prices.
-             - **Predictive Analysis**: A tool that allows you to estimate the value of a house based on desired characteristics and the number of nearby amenities.
-             - **Research Questions**: My responses to key research questions, detailing findings and conclusions from the study.
-             - **Dataset**: Access and view the database used for this project, including all underlying data and sources.
-            """)
+    st.write("""Explore the application through the sidebar, which serves as the main menu. Here\'s what you can find:""")
+    st.write("- **Home Page(here)**: An introduction to the project, outlining its purpose and scope.")
+    st.write("- **Statistical Analysis**: Interactive visualizations that display the dataset, offering insights into how different factors influence house prices.")
+    st.write("- **Predictive Analysis**: A tool that allows you to estimate the value of a house based on desired characteristics and the number of nearby amenities.")
+    st.write("- **Research Questions**: My responses to key research questions, detailing findings and conclusions from the study.")
+    st.write("- **Dataset**: Access and view the database used for this project, including all underlying data and sources.")
+  
     st.subheader("Interactivity")
     st.write("""- **Comparative Analysis of High Rating Neighborhood Amenities in Orange County (Line plot)**: Explore the relationship between house prices per square foot and the count of neighborhood amenities. 
              You can select specific city within Orange County or view data for the entire Orange County by default. The line plot provides insights into how amenities add value to properties on a per-square-foot basis across different locales.""")
