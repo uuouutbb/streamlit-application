@@ -1,0 +1,63 @@
+
+Angie Tang
+
+For Milestone2, I have use a new api that is Geoapify places api. I use it to find park/grocery stores/schools within 1 mile of each house location using longitude and latitude.
+
+1.	What are the strengths of your data modeling format?
+
+My model employs foreign keys to maintain integrity between related data across tables, ensuring accurate and consistent relationships:
+The HOUSES table has 'zpid' as its primary key, which is originally the house ID from Zillow and is guaranteed to be unique. Additionally, it contains 'zipcode', which serves as a foreign key referencing the OCINCOMEBYZIP table.
+The PLACESAROUND table includes an auto generated primary key for each row representing a place around the house, with 'zpid' serving as a foreign key that links back to the HOUSES table.
+The OCINCOMEBYZIP table uses unique zip codes as its primary keys, allowing for efficient retrieval of income data for each zip code, which can be joined with the HOUSES table.
+
+By normalizing data into three separate tables, the model facilitates efficient queries and minimizes data redundancy. This arrangement simplifies maintenance and enhances the ability to perform specific queries, such as retrieving all places around a particular property or fetching income data associated with a given zip code.
+
+Lastly, the model is designed for scalability. New properties, places, or income records can be added without significantly impacting performance. Each table can be independently modified or indexed based on usage patterns, further supporting the system’s scalability and adaptability.
+
+2.	What are the weaknesses?  (Does your data model support?  Sorting the information? Re-ordering it?  Only obtaining a certain subset of the information?)  
+
+While my model supports sorting and reordering, if common queries require only a subset of data, for example, fetching just the price and type of properties without needing place or income data, the current schema may not be optimized for such operations, might lead to overfetching and inefficiency.
+
+
+3.	How do you store your data on disk?
+
+The data is first downloaded as json and then converted into csv files for future use. After some data cleaning operations, I have stored them in an SQLite database, and saved as a single file on disk.
+
+Table explanation:
+
+HOUSES Table: This table stores detailed information about properties, including their unique identifier (zpid), city, ZIP code, year sold, property type, price, number of bedrooms, bathrooms, living area, and the year built. This structure helps in querying property-related information efficiently and supports relational operations with other data tables based on property identifiers and ZIP codes.
+
+PLACESAROUND Table: Associated with each property, this table includes data about nearby places like grocery stores, schools, and parks. Each record contains an auto-incremented primary key, a foreign key (zpid) linking it to the HOUSES table, the name of the place, and its category. This setup facilitates easy retrieval of places related to specific properties, enhancing the dataset's value for location-based queries.
+
+OCINCOMEBYZIP Table: This table is dedicated to storing average income. Each zip code is unique and serves as the primary key, ensuring that income data can be quickly joined with property data from the HOUSES table using the zip code as a common attribute.
+
+4.	Let’s say you find another data source that relates to all 3 of your data sources (i.e. a data source that relates to your existing data).  How would you extend your model to include this new data source?  How would that change the interface?  
+
+Suppose the new data source provides environmental data (like air quality) linked via ZIP codes. I would:
+First, add a new table call EnvironmentalData with a foreign key to OCINCOMEBYZIP table. 
+CREATE TABLE EnvironmentalData (
+    EnvironmentalID INT PRIMARY KEY AUTOINCREMENT,
+    zipcode TEXT,
+    AirQualityIndex INT,
+    FOREIGN KEY (zipcode) REFERENCES OCINCOMEBYZIP(zipcode)
+)
+Since the link is primarily through zip codes, it might be more efficient to join HOUSES to EnvironmentalData via the OCINCOMEBYZIP table during queries rather than altering the table structure. 
+
+Lastly, I would update the interface and consider user input mechanisms for selecting or filtering properties based on environmental criteria.
+
+SELECT h.*, e.AirQualityIndex
+FROM HOUSES h
+JOIN OCINCOMEBYZIP o ON h.zipcode = o.zipcode
+JOIN EnvironmentalData e ON o.zipcode = e.zipcode
+WHERE h.zpid = '123456'
+
+5.	How would you add a new attribute to your data (for example: imagine you had a lat/long column in a database.  You might use that to access an API to get a city name.  How would you add city name to your data?)  
+
+First, I will alter my existing table to add a new column name "cityName".
+ALTER TABLE HOUSES
+ADD COLUMN cityName TEXT
+
+Second, I will write a script to get api data(city name) based on lat, long.
+
+Last, I will modify database queries to add city name to my data.
+SELECT zpid, latitude, longitude, cityName FROM HOUSES;
