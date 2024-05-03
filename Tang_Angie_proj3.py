@@ -41,16 +41,15 @@ def home_page():
     st.header("How to Use This Webapp")
     st.subheader("Interactivity and Navigation")
     st.write("""
-    - **Comparative Analysis of High Rating Neighborhood Amenities in Orange County (Line plot)**: Explore the relationship between house prices per square foot and the count of neighborhood amenities. \n
-             You can select specific city within Orange County or view data for the entire Orange County by default.\n
-             The line plot provides insights into how amenities add value to properties on a per-square-foot basis across different locales.\n
-    - **Analysis of Amenities Impact on Price by Bedroom Count (Bar chart)**: Investigate how neighborhood amenities impact house prices based on the size of the house (measured by the number of bedrooms).\n 
-             Adjust the number of bedrooms to see how the prices fluctuate.\n
-             The bar chart helps visualize the influence of amenities on homes of different sizes, suggesting tailored strategies for different types of properties.\n
-    - **Local Income vs Price in Orange County (Scatter Plot)**: Examine the relationship between local income and house prices in various zip codes to determine the influence of economic status on property values.\n
-             The scatter plot offers a perspective on how average local incomes correlate with house prices, indicating economic factors at play. \n     
-    - **Predictive Analysis**: Estimate house prices based on selected features. This tool is designed for potential home buyers or investors to forecast house prices tailored to specific preferences.
-    """)
+    - **Comparative Analysis of High Rating Neighborhood Amenities in Orange County (Line plot)**: Explore the relationship between house prices per square foot and the count of neighborhood amenities.""")
+    st.write("You can select specific city within Orange County or view data for the entire Orange County by default.")
+    st.write("The line plot provides insights into how amenities add value to properties on a per-square-foot basis across different locales.")
+    st.write("""- **Analysis of Amenities Impact on Price by Bedroom Count (Bar chart)**: Investigate how neighborhood amenities impact house prices based on the size of the house (measured by the number of bedrooms).
+             Adjust the number of bedrooms to see how the prices fluctuate.""")
+    st.write("The bar chart helps visualize the influence of amenities on homes of different sizes, suggesting tailored strategies for different types of properties.")
+    st.write("- **Local Income vs Price in Orange County (Scatter Plot)**: Examine the relationship between local income and house prices in various zip codes to determine the influence of economic status on property values.")
+    st.write("The scatter plot offers a perspective on how average local incomes correlate with house prices, indicating economic factors at play.")
+    st.write("- **Predictive Analysis**: Estimate house prices based on selected features. This tool is designed for potential home buyers or investors to forecast house prices tailored to specific preferences.")
 
 
     st.subheader("Conclusions from the Analysis")
@@ -61,7 +60,7 @@ def home_page():
     """)
     st.subheader("Major \"Gotchas\"")
     st.write("""
-    - **Performance Issues**: Due to api limitation, there might not have enough data for a accurate analysis. Some cities are too small to have enough data for visulization and prediction. \n
+    - **Performance Issues**: Due to api limitation, there might not have enough data for a accurate analysis. Some cities are too small to have enough data for visulization and prediction.
              Therefore, I have put the cities with more population on the top for the city select boxes. Please choose a city showed on top of the list.
     - **Improvement Opportunities**: The predictive tool currently uses a limited set of features. Expanding this to include more detailed aspects like crime rates, public transport accessibility, and historical price trends could enhance its accuracy and usefulness.
     """)
@@ -70,23 +69,23 @@ def question_page():
     st.subheader("4. Purpose of the Project") 
     st.write("""
     - **Original Focus**: The project was initially aimed at predicting house values, focusing on the impact of high-rated community resources such as parks, schools, and local income levels on house prices. 
-             The intent was to analyze how amenities and demographic factors influence pricing, and to provide accurate price predictions using a range of features (beds, baths, square footage, year built, nearby amenities).
-    - **Discoveries and Conclusions**
-        **Key Findings**: 
-            **Influence of Parks and Schools**: As hypothesized, the presence of highly-rated parks and schools within a 1-mile radius significantly increases house prices, reflecting the premium buyers place on accessible educational and recreational amenities.\n
-            **Variable Impact in Different Cities**: In cities like Aliso Viejo, Fullerton, and Laguna Beach, house prices showed an unexpected decrease with improved school accessibility.
-            This may be attributed to these cities having a higher proportion of older residents or tourists, who may prioritize different features in housing.\n
-            **Impact of House Size on Price Sensitivity**: Larger homes demonstrated a more pronounced price increase with better amenities, supporting the idea that families, particularly those with children, value these features more.\n
-            **Local Income vs. House Prices**: Contrary to expectations, only a slight correlation was found between higher local incomes and house prices, possibly due to a demographic with older residents who are less likely to move, thus reducing the impact of income on house prices.\n
-            **Original Assumptions Revisited**: While the influence of parks and schools was confirmed, other factors like local average income and proximity to grocery stores did not show a clear correlation with house prices.
-    - **Difficulties Encountered**
-             The major challenge was the API limitation, which restricted access to comprehensive historical price data. This limitation hindered the ability to predict future house prices effectively, as the most recent data available was from October 2023.
-    - **Desired Skills**
-             During the project, I wished I had stronger skills in Machine Learning. Having better skills in machine learning could have allowed me to apply more sophisticated models to predict house prices, especially models that can handle large datasets and complex relationships between features.
-    - **Future Directions**
-            **Expanding the Predictive Model**: To augment the project, I would enhance the predictive tool by incorporating additional features such as crime rates, public transportation options, and historical price trends. These factors could provide a more comprehensive view of the factors influencing house prices.\n
-            **Incorporating Machine Learning**: Implementing more advanced machine learning models to predict price trends based on a broader array of indicators would also be a valuable next step. This could include time series analysis to better understand price fluctuations over time.
-    """)
+             The intent was to analyze how amenities and demographic factors influence pricing, and to provide accurate price predictions using a range of features (beds, baths, square footage, year built, nearby amenities).""")
+    st.write("- **Discoveries and Conclusions**")
+    st.write("**Key Findings**:")
+    st.write(" **Influence of Parks and Schools**: As hypothesized, the presence of highly-rated parks and schools within a 1-mile radius significantly increases house prices, reflecting the premium buyers place on accessible educational and recreational amenities.")
+    st.write("**Variable Impact in Different Cities**: In cities like Aliso Viejo, Fullerton, and Laguna Beach, house prices showed an unexpected decrease with improved school accessibility.")
+    st.write("This may be attributed to these cities having a higher proportion of older residents or tourists, who may prioritize different features in housing.")
+    st.write("**Impact of House Size on Price Sensitivity**: Larger homes demonstrated a more pronounced price increase with better amenities, supporting the idea that families, particularly those with children, value these features more.")
+    st.write("**Local Income vs. House Prices**: Contrary to expectations, only a slight correlation was found between higher local incomes and house prices, possibly due to a demographic with older residents who are less likely to move, thus reducing the impact of income on house prices.")
+    st.write("**Original Assumptions Revisited**: While the influence of parks and schools was confirmed, other factors like local average income and proximity to grocery stores did not show a clear correlation with house prices.")
+    st.write("- **Difficulties Encountered**")
+    st.write("The major challenge was the API limitation, which restricted access to comprehensive historical price data. This limitation hindered the ability to predict future house prices effectively, as the most recent data available was from October 2023.")
+    st.write("- **Desired Skills**")
+    st.write("During the project, I wished I had stronger skills in Machine Learning. Having better skills in machine learning could have allowed me to apply more sophisticated models to predict house prices, especially models that can handle large datasets and complex relationships between features.")
+    st.write("- **Future Directions**")
+    st.write("**Expanding the Predictive Model**: To augment the project, I would enhance the predictive tool by incorporating additional features such as crime rates, public transportation options, and historical price trends. These factors could provide a more comprehensive view of the factors influencing house prices.")
+    st.write("**Incorporating Machine Learning**: Implementing more advanced machine learning models to predict price trends based on a broader array of indicators would also be a valuable next step. This could include time series analysis to better understand price fluctuations over time.")
+
 
 def statistical_analysis_plots(data):
     st.subheader('Comparative Analysis of High Rating Neighborhood Amenities in Orange County')
